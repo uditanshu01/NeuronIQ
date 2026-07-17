@@ -1,87 +1,191 @@
-# Learnly — AI Study Assistant
+# 🧠 NeuronIQ – AI Study Assistant
 
-Learnly turns pasted study notes into an interactive flashcard deck and multiple-choice quiz. It is deliberately designed as a study workspace, not a chatbot: the client renders only validated structured data returned by the API.
+NeuronIQ is an AI-powered study assistant that transforms lengthy notes into structured learning material within seconds. Simply paste your notes, and the application generates concise summaries, interactive flashcards, and quizzes to make studying faster and more effective.
 
-## Features
+---
 
-- OpenRouter or Gemini-powered flashcards and four-option quizzes
-- Animated, keyboard-accessible flashcards (Left/Right to navigate; Space to flip)
-- One-question-at-a-time quiz, results, and retry-only-incorrect flow without another AI request
-- Defensive JSON and schema validation on both server and client
-- Loading, network, empty-response, malformed-output, and stale-request handling
-- Dark mode and latest generated session persisted in local storage
-- Responsive dashboard with accessible labels, focus states, and semantic controls
+## ✨ Features
 
-## Tech stack
+- 📄 AI-generated study summaries
+- 🧠 Interactive flashcards for quick revision
+- ❓ Automatically generated quizzes
+- ⚡ Fast and responsive user interface
+- 🎨 Modern dark-themed dashboard
+- 📱 Fully responsive design
 
-React + Vite, Tailwind CSS, Node.js, Express, dotenv, Gemini, and OpenRouter-compatible API calls.
+---
 
-## Installation and local run
+## 🛠️ Tech Stack
 
-```bash
-cd study-assistant
-npm install
-cp server/.env.example server/.env
-cp client/.env.example client/.env
-# Set OPENROUTER_API_KEY or GEMINI_API_KEY in server/.env
-npm run dev
+### Frontend
+- React
+- Vite
+- CSS3
+- JavaScript (ES6)
+
+### Backend
+- Node.js
+- Express.js
+
+### AI
+- OpenRouter API
+- Google Gemini API (Fallback)
+
+---
+
+## 📂 Project Structure
+
 ```
-
-The client runs on `http://localhost:5173`; the API runs on `http://localhost:5001`.
-
-## Environment variables
-
-| Variable | Where | Purpose |
-| --- | --- | --- |
-| `GEMINI_API_KEY` | `server/.env` | Google AI Studio key; never expose this to the client. |
-| `GEMINI_MODEL` | `server/.env` | Optional Gemini model override; defaults to `gemini-2.0-flash`. |
-| `OPENROUTER_API_KEY` | `server/.env` | OpenRouter key; selected when present. |
-| `OPENROUTER_MODEL` | `server/.env` | Optional OpenRouter model; defaults to `openrouter/free`. |
-| `PORT` | `server/.env` | Optional API port; defaults to `5001`. |
-| `CLIENT_ORIGIN` | `server/.env` | Comma-separated allowed frontend origins. |
-| `VITE_API_URL` | `client/.env` | Public URL of the deployed backend API. |
-
-## API
-
-`POST /api/generate`
-
-```json
-{ "notes": "Your study notes…" }
-```
-
-The response is validated before it is sent and has this shape:
-
-```json
-{ "flashcards": [{ "question": "", "answer": "" }], "quiz": [{ "question": "", "options": ["", "", "", ""], "correctAnswer": "" }] }
-```
-
-## AI usage note
-
-The backend asks the configured provider for JSON-only output. Output is still parsed and checked server-side, then revalidated client-side; LLM output is never trusted merely because a prompt requested a format.
-
-## Deployment
-
-**Render:** Create a Node web service rooted at `study-assistant`, set its build command to `npm install`, start command to `npm start`, and add the server environment variables. Set `CLIENT_ORIGIN` to the deployed Vercel URL.
-
-**Vercel:** Import the repository, set the root directory to `study-assistant/client`, build command to `npm run build`, and set `VITE_API_URL` to the Render API URL. Redeploy after setting the variable.
-
-## Folder structure
-
-```text
-study-assistant/
-├── client/src/       # components, hooks, services, utils, constants
-├── server/src/       # routes, controllers, services, validation
+NeuronIQ/
+│
+├── client/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── server/
+│   ├── src/
+│   ├── routes/
+│   ├── services/
+│   ├── .env
+│   └── package.json
+│
 └── README.md
 ```
 
-## Known limitations
+---
 
-Generated content quality depends on the source notes and model availability. The free-tier provider may impose rate limits. Sessions remain in the individual browser only.
+## 🚀 Installation
 
-## Future improvements
+### 1. Clone the Repository
 
-User accounts and cloud sync, import/export, spaced-repetition scheduling, editable generated content, and automated API/component tests.
+```bash
+git clone https://github.com/uditanshu01/NeuronIQ.git
+```
 
-## Time spent
+```bash
+cd NeuronIQ
+```
 
-_Add final time spent here._
+---
+
+### 2. Install Dependencies
+
+#### Client
+
+```bash
+cd client
+npm install
+```
+
+#### Server
+
+```bash
+cd ../server
+npm install
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file inside the **server** directory.
+
+```env
+OPENROUTER_API_KEY=your_openrouter_api_key
+OPENROUTER_MODEL=google/gemini-2.5-flash
+
+GEMINI_API_KEY=your_gemini_api_key
+
+PORT=8000
+
+CLIENT_ORIGIN=http://localhost:5173
+```
+
+---
+
+## ▶️ Running the Application
+
+### Start Backend
+
+```bash
+cd server
+npm run dev
+```
+
+### Start Frontend
+
+```bash
+cd client
+npm run dev
+```
+
+Visit:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 📸 Preview
+
+- AI Notes Generator
+- Smart Study Summary
+- Interactive Flashcards
+- Practice Quiz
+
+---
+
+## 📈 Future Improvements
+
+- User Authentication
+- Study History
+- PDF Upload Support
+- Export Notes as PDF
+- Multiple AI Model Support
+- Progress Tracking
+- Dark/Light Theme Toggle
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature/NewFeature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to the branch
+
+```bash
+git push origin feature/NewFeature
+```
+
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub to support future development.
+
+---
+
+Made with ❤️ using React, Node.js, Express, and AI.
